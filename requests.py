@@ -1,17 +1,15 @@
 from freebible import read_web
 web = read_web()
 
-def getverse(book, chapter, verse):
-    buk = book.capitalize()
-
-    if buk == "List":
-        return web.keys()
-
-    if buk not in web.keys():
+def getverse(book, *args):
+    book_name = book.capitalize()
+    if book_name not in web.keys():
         return "The book you selected is not in the Bible. Please try again."
-    
     try:
-        data = web[f"{buk}"][chapter][verse]
+        chapter = args[0]
+        verse = args[1]
+        print(book, chapter, verse)
+        data = web[book_name][chapter][verse]
         print(data)
         return data
     except Exception as e:
